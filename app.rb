@@ -50,6 +50,15 @@ class App < Sinatra::Base
   set :public_folder, File.dirname(__FILE__) + '/public'
 
   before do
+    # Redirect all routes to sunset page if SUNSET environment variable is set
+    if ENV['SUNSET'] == 'true'
+      static_file_extensions = %w[.html .css .js .png .jpg .jpeg .gif .svg .ico .woff .woff2 .ttf .eot]
+      is_static_file = static_file_extensions.any? { |ext| request.path_info.end_with?(ext) }
+      redirect '/sunset.html' if !is_static_file && request.path_info != '/sunset.html'
+    end
+  end
+
+  before do
     if ENV['RACK_ENV'] == 'production' || ENV['ENABLE_CSP'] == 'true'
       SecureHeaders.append_content_security_policy_directives(
         request,

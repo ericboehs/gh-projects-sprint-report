@@ -119,6 +119,9 @@ fly secrets set SEED_GH_PROJECT_URLS="https://github.com/orgs/your-org/projects/
 # Production environment
 fly secrets set RACK_ENV=production
 
+# Redirect all routes to sunset page (OPTIONAL - for service retirement)
+fly secrets set SUNSET=true
+
 # Show sunset banner (OPTIONAL - defaults to false for self-hosting)
 fly secrets set SHOW_SUNSET_BANNER=true
 ```
@@ -212,6 +215,9 @@ SEED_GH_PROJECT_URLS="https://github.com/orgs/your-org/projects/123"
 RACK_ENV="development"
 ENABLE_CSP="false"
 DEBUG="false"
+
+# Redirect all routes to sunset page (OPTIONAL - for service retirement)
+SUNSET="false"
 
 # Sunset banner (OPTIONAL - set to "true" to show the banner)
 SHOW_SUNSET_BANNER="false"
